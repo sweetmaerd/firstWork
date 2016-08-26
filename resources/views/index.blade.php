@@ -25,7 +25,12 @@
 
         unset($_SESSION['sent']);
     }
+
 @endif
+<?php 
+    $arr = ['resume','portfolio','project', 'aboutme', 'contact'];
+    $count = 0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,9 +55,17 @@
 			<div id="text"><img src={{asset('img/resume.png')}} alt="" title=""></div>
 			<div id="stripe"></div>
 			
-		    @include($content)
-			
-		
+            @foreach($arr as $v)            
+                @if ($page == $v)
+                    {!! $count = '1'; !!}
+                @endif
+            @endforeach
+            
+            @if($count)
+                @include($content)
+            @else
+                @include('templates.contenrerror')
+            @endif
 		</div><!-- content-innertube end -->
 		<div class="clear"></div>
 		
