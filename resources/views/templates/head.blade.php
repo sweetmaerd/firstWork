@@ -4,7 +4,8 @@
 
 <title>THEMELOCK.COM - Retail Only Themes & Templates</title>
 
-<link rel="stylesheet" type="text/css" media="screen" href={{asset('css/main.css')}} />
+@section('styles')
+
 
 <link rel="stylesheet" type="text/css" media="print" href={{asset('css/print.css')}}  />
 
@@ -15,6 +16,7 @@
 <link href='http://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css'>
 
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" media="screen" href="css/ie-fix.css" /><![endif]-->
+@show
 
 <script type="text/javascript" src={{asset("js/jquery-1.5.2.min.js")}}></script>
 

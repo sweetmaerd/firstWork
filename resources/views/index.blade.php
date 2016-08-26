@@ -1,32 +1,10 @@
-@if($page == 'contact')
-    session_name("fancyform");
-    session_start();
+@section('styles')
+@parent
+<link rel="stylesheet" type="text/css" media="screen" href={{asset('css/main.css')}} />
+@endsection
 
 
 
-    $_SESSION['n1'] = rand(1,20);
-    $_SESSION['n2'] = rand(1,20);
-    $_SESSION['expect'] = $_SESSION['n1']+$_SESSION['n2'];
-
-
-    $str='';
-    if($_SESSION['errStr'])
-    {
-        $str='<div class="error">'.$_SESSION['errStr'].'</div>';
-        unset($_SESSION['errStr']);
-    }
-
-    $success='';
-    if($_SESSION['sent'])
-    {
-        $success='<h1 class="mail-sent">Thank you!</h1>';
-
-        $css='<style type="text/css">#contact-form{display:none;}</style>';
-
-        unset($_SESSION['sent']);
-    }
-
-@endif
 <?php 
     $arr = ['resume','portfolio','project', 'aboutme', 'contact'];
     $count = 0;
@@ -35,9 +13,14 @@
 <html lang="en">
 <head>
 @extends('templates.head')
+    <h2>{{$text->name}}</h2>
 </head>
 <body>
-
+    @if($text->body)
+    <div>
+        {{$text->body}}
+    </div>
+    @endif
 <div id="page-shadow">
 
 	<div id="page">
@@ -55,17 +38,7 @@
 			<div id="text"><img src={{asset('img/resume.png')}} alt="" title=""></div>
 			<div id="stripe"></div>
 			
-            @foreach($arr as $v)            
-                @if ($page == $v)
-                    {!! $count = '1'; !!}
-                @endif
-            @endforeach
             
-            @if($count)
-                @include($content)
-            @else
-                @include('templates.contenrerror')
-            @endif
 		</div><!-- content-innertube end -->
 		<div class="clear"></div>
 		

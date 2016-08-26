@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,9 +15,10 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex($url = 'index')
     {
-        //
+        $text = DB::table('maintexts')->where('url','=', $url)->first();
+        return view('index')->with('text',$text);
     }
 
     /**
@@ -27,6 +29,16 @@ class BaseController extends Controller
     public function create()
     {
         //
+    }
+    
+    public function getInsert($url,$name,$body='')
+    {
+        $text = DB::table('maintexts')->insert([
+            'url'=>$url, 
+            'name'=>$name, 
+            'body'=>$body
+        ]);
+        return 'данные добавлены';
     }
 
     /**
@@ -83,9 +95,5 @@ class BaseController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function showProfile() {
-        echo "This is ".__METHOD__;
     }
 }

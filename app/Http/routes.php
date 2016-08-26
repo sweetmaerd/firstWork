@@ -12,7 +12,7 @@
 
 Route::get('/', function ($page) {
     return view('index');
-})*/
+})
 
 Route::get('user/profile', [
   'as' => 'profile', 'uses' => 'BaseController@showProfile'
@@ -20,5 +20,10 @@ Route::get('user/profile', [
 
 Route::get('/{page?}', function ($page = 'resume') {
     return view('index',['content'=>'templates.content'.$page, 'page'=>$page]);
-});
+});*/
+Route::controllers([
+    'crud'=>'BaseController',
+    '{id?}'=>'BaseController',
+    
+]);
 
