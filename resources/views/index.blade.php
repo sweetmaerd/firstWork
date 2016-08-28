@@ -13,14 +13,10 @@
 <html lang="en">
 <head>
 @extends('templates.head')
-    <h2>{{$text->name}}</h2>
+    
 </head>
 <body>
-    @if($text->body)
-    <div>
-        {{$text->body}}
-    </div>
-    @endif
+   
 <div id="page-shadow">
 
 	<div id="page">
@@ -38,7 +34,7 @@
 			<div id="text"><img src={{asset('img/resume.png')}} alt="" title=""></div>
 			<div id="stripe"></div>
 			
-            
+            @include( $content )
 		</div><!-- content-innertube end -->
 		<div class="clear"></div>
 		

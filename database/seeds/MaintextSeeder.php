@@ -15,7 +15,8 @@ class MaintextSeeder extends Seeder
         DB::table('maintexts')->insert([
             'name'=>'Добро пожаловать на сайт',
             'body'=>'Текст',
-            'url'=>'index'
+            'url'=>'index',
+            'created_at'=>date('Y.m.d H:i:s')
         ]);
     }
 }

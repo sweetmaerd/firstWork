@@ -17,13 +17,11 @@ Route::get('/', function ($page) {
 Route::get('user/profile', [
   'as' => 'profile', 'uses' => 'BaseController@showProfile'
 ]);
+*/
 
-Route::get('/{page?}', function ($page = 'resume') {
-    return view('index',['content'=>'templates.content'.$page, 'page'=>$page]);
-});*/
 Route::controllers([
+    'page/{page?}'=>'BaseController',
     'crud'=>'BaseController',
     '{id?}'=>'BaseController',
-    
 ]);
 

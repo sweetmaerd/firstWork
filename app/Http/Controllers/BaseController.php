@@ -40,6 +40,11 @@ class BaseController extends Controller
         ]);
         return 'данные добавлены';
     }
+    
+    public function getPage($page = 'resume')
+    {
+        return view('index',['content'=>'templates.content'.$page]);
+    }
 
     /**
      * Store a newly created resource in storage.
