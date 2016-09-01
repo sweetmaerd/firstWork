@@ -1,21 +1,20 @@
 @extends('layouts.app')
-
 @section('form')
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Флрма редактирования статей</div>
+                <div class="panel-heading">Флрма добавления статей</div>
 
                 <div class="panel-body">
                     @if(count($errors))
-                        @foreach($errors as $err)
-                        <p>{{$err}}</p>
-                        @endforeach
+                    @foreach($errors as $err)
+                    <p>{{$err}}</p>
+                    @endforeach
                     @endif
 
                     <!--Начало формы -->
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/home/update/'.$entery->id) }}" enctype = 'multipart/form-data'>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}" enctype = 'multipart/form-data'>
                         {{ csrf_field() }}
 
                         <!--Начало input title -->
@@ -23,13 +22,8 @@
                             <label for="title" class="col-md-4 control-label">Нзвание статьи*</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value=
-                                @if(!count($errors))
-                                    "{{ $entery->title }}";
-                                @else
-                                    "{{ old('title') }}";
-                                @endif
-                                placeholder="Введи название">
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Введи название">
+
                                 @if ($errors->has('title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -45,7 +39,7 @@
 
                             <div class="col-md-6">
                                 <textarea id="description"
-                                          class="form-control" name="description" placeholder="Вы что-то хотели написать?">@if(!count($errors)){{$entery->description}}@else{{old('description')}}@endif</textarea>
+                                          class="form-control" name="description" placeholder="Вы что-то хотели написать?">{{ old('description') }}</textarea>
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -64,11 +58,7 @@
                                 <p><select id="categories_id" class="form-control" name="categories_id"  >
 
                                         @foreach($category as $cat)
-                                        <option
-                                            @if($cat->description == $entery->categories_id )
-                                                {{ 'selected' }}
-                                            @endif
-                                        value= {{ $cat->description }} >{{ $cat->description }}</option>
+                                        <option value= {{ $cat->description }} >{{ $cat->description }}</option>
                                         @endforeach
                                     </select></p>
 
@@ -86,13 +76,7 @@
                             <label for="date" class="col-md-4 control-label">Дата мероприятия</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="date" class="form-control" name="date" value=
-                                    @if(!count($errors))
-                                    "{{ $entery->date }}";
-                                    @else
-                                    "{{ old('date') }}";
-                                    @endif
-                                >
+                                <input id="date" type="date" class="form-control" name="date" value="{{ old('date') }}">
 
                                 @if ($errors->has('date'))
                                     <span class="help-block">
@@ -104,17 +88,11 @@
                         <!--Конец input date -->
 
                         <!--Начало input URL -->
-                        <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}" >
+                        <div class="form-group{{ $errors->has('URL') ? ' has-error' : '' }}" >
                             <label for="url" class="col-md-4 control-label">ЧПУ адрес</label>
 
                             <div class="col-md-6">
-                                <input id="url" type="text" class="form-control" name="url" value=
-                                    @if(!count($errors))
-                                    "";
-                                    @else
-                                    "{{ old('url') }}";
-                                    @endif
-                                placeholder="Оставьте пустым, если не хотите менять URL ">
+                                <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}" placeholder="kak-zarabotat-mnogo-deneg">
 
                                 @if ($errors->has('url'))
                                     <span class="help-block">
@@ -130,13 +108,7 @@
                             <label for="author" class="col-md-4 control-label">Автор статьи</label>
 
                             <div class="col-md-6">
-                                <input id="author" type="text" class="form-control" name="author" value=
-                                    @if(!count($errors))
-                                    "{{ $entery->author }}";
-                                    @else
-                                    "{{ old('author') }}";
-                                    @endif
-                                placeholder="Например John">
+                                <input id="author" type="text" class="form-control" name="author" value="{{ old('author') }}" placeholder="Например John">
 
                                 @if ($errors->has('author'))
                                     <span class="help-block">
@@ -153,13 +125,8 @@
 
                             <div class="col-md-6">
                                 <p><select id="showhide" class="form-control" name="showhide">
-                                        @if('show' == $entery->showhide )
-                                            <option selected value='show'>Показать</option>
-                                            <option value= 'hide' >Скрыть</option>
-                                        @else
-                                            <option value='show'>Показать</option>
-                                            <option selected value= 'hide' >Скрыть</option>
-                                        @endif
+                                        <option selected value='show'>Показать</option>
+                                        <option value= 'hide' >Скрыть</option>
                                     </select>
                                 </p>
 
@@ -178,7 +145,7 @@
                             <label for="img" class="col-md-4 control-label">Добавить изображения</label>
 
                             <div class="col-md-6">
-                                <input id="img" type="file"  name="img">
+                                <input id="img" type="file"  name="picture1">
 
                                 @if ($errors->has('img'))
                                     <span class="help-block">
@@ -188,11 +155,11 @@
                             </div>
                         </div>
                         <!--Конец input img -->
-                        
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" >
-                                     Сохранить
+                                    Сохранить
                                 </button>
                             </div>
                         </div>

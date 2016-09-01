@@ -56,12 +56,41 @@ return [
     | considered valid. This security feature keeps tokens short-lived so
     | they have less time to be guessed. You may change this as needed.
     |
-    */
+
 
     'password' => [
         'email'  => 'emails.password',
         'table'  => 'password_resets',
         'expire' => 60,
+    ],*/
+    'defaults' => [
+        'guard' => 'admin',
+        'passwords' => 'admin',
     ],
+
+    'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ]
+    ],
+
+    'providers' => [
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+    ],
+
+    'passwords' => [
+        'admin' => [
+            'provider' => 'admin',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+    ],
+
+
 
 ];

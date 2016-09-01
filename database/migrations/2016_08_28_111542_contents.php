@@ -10,6 +10,7 @@ class Contents extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         Schema::create('contents', function ($table) {
@@ -19,7 +20,8 @@ class Contents extends Migration
             //$table->boolean('topical');
             $table->text('img');
             $table->string('url', 120);
-            $table->integer('categories_id');
+            $table->string('categories_id');
+            //$table->foreign('categories_id')->references('id')->on('categories');
             $table->dateTime('date');
             $table->string('author',30);
             $table->enum('showhide', array('show', 'hide'))->default('show');

@@ -20,9 +20,17 @@
 <div id="page-shadow">
 
 	<div id="page">
-	
+
 		<div class="content-innertube">
-	
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if(!Auth::user())
+                <li><a  href="{{ url('/auth/login') }}"><span class="glyphicon glyphicon-log-in">Войти</span></a></li>
+                <li><a  href="{{ url('/auth/register') }}"><span class="glyphicon glyphicon-user">Зарегистрироваться</span></a></li>
+                @else
+                <li>Привет {{Auth::user()->name}}<a  href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out">выйти?</span></a></li>
+                @endif
+            </ul>
 			<div id="header">
 			
 				
@@ -34,7 +42,8 @@
 			<div id="text"><img src={{asset('img/resume.png')}} alt="" title=""></div>
 			<div id="stripe"></div>
 			
-            @include( $content )
+            @include( "$content" )
+            
 		</div><!-- content-innertube end -->
 		<div class="clear"></div>
 		

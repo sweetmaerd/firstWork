@@ -18,10 +18,17 @@ Route::get('user/profile', [
   'as' => 'profile', 'uses' => 'BaseController@showProfile'
 ]);
 */
-
+Route::get('/home', 'HomeController@index');
 Route::controllers([
-    'page/{page?}'=>'BaseController',
+    '/auth'=>'Auth\AuthController',
+    '/home'=>'HomeController',
+    'age'=>'BaseController',
     'crud'=>'BaseController',
-    '{id?}'=>'BaseController',
+    '{page?}'=>'BaseController',
 ]);
+
+
+
+Route::auth();
+
 

@@ -15,10 +15,11 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex($url = 'index')
+    public function getIndex($page= 'resume')
     {
-        $text = DB::table('maintexts')->where('url','=', $url)->first();
-        return view('index')->with('text',$text);
+        return view('index',['content'=>'templates.content'.$page]);
+        //$text = DB::table('maintexts')->where('url','=', $url)->first();
+        //return view('index')->with('text',$text);
     }
 
     /**
@@ -41,9 +42,9 @@ class BaseController extends Controller
         return 'данные добавлены';
     }
     
-    public function getPage($page = 'resume')
+    public function getHome()
     {
-        return view('index',['content'=>'templates.content'.$page]);
+        return 'Домашняя страница. Вам меньше 18!';
     }
 
     /**
