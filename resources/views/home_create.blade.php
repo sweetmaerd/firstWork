@@ -108,8 +108,13 @@
                             <label for="author" class="col-md-4 control-label">Автор статьи</label>
 
                             <div class="col-md-6">
-                                <input id="author" type="text" class="form-control" name="author" value="{{ old('author') }}" placeholder="Например John">
-
+                                <p>
+                                    <select id="author" class="form-control" name="author"  >
+                                        @foreach($users as $user)
+                                        <option value= {{ $user->name }} >{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
                                 @if ($errors->has('author'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('author') }}</strong>
