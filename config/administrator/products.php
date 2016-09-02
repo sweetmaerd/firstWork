@@ -28,7 +28,7 @@ return array(
 
     //фильтры
     'filters'=>array(
-        'id','title','author','showhide'
+        'id','title','author','showhide','date'
     ),
 
     //формы
