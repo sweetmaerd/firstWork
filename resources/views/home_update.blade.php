@@ -130,14 +130,29 @@
                             <label for="author" class="col-md-4 control-label">Автор статьи</label>
 
                             <div class="col-md-6">
-                                <input id="author" type="text" class="form-control" name="author" value=
-                                    @if(!count($errors))
-                                    "{{ $entery->author }}";
-                                    @else
-                                    "{{ old('author') }}";
-                                    @endif
-                                placeholder="Например John">
 
+                                <p>
+                                    @if(!count($errors))
+                                    <?php $author = $entery->author ?>
+                                    @else
+                                    <?php $author = old('author') ?>
+                                    @endif
+                                    <select id="author" class="form-control" name="author"  >
+                                        @foreach($users as $user)
+                                        <option
+                                        @if(!count($errors))
+                                            @if($entery->author == $user->name)
+                                            {{ 'selected' }}
+                                            @endif
+                                        @else
+                                            @if(old('author') == $user->name)
+                                            {{ 'selected' }}
+                                            @endif
+                                        @endif
+                                        value="{{$user->name}}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
                                 @if ($errors->has('author'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('author') }}</strong>
@@ -178,7 +193,7 @@
                             <label for="img" class="col-md-4 control-label">Добавить изображения</label>
 
                             <div class="col-md-6">
-                                <input id="img" type="file"  name="pict">
+                                <input id="img" type="file"  name="picture1">
 
                                 @if ($errors->has('img'))
                                     <span class="help-block">

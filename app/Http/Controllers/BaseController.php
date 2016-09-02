@@ -18,8 +18,6 @@ class BaseController extends Controller
     public function getIndex($page= 'resume')
     {
         return view('index',['content'=>'templates.content'.$page]);
-        //$text = DB::table('maintexts')->where('url','=', $url)->first();
-        //return view('index')->with('text',$text);
     }
 
     /**
