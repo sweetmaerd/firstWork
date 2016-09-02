@@ -20,9 +20,9 @@ Route::get('user/profile', [
 */
 Route::get('/home', 'HomeController@index');
 Route::controllers([
+    '/post' => 'HomeController',
     '/auth'=>'Auth\AuthController',
     '/home'=>'HomeController',
-    'age'=>'BaseController',
     'crud'=>'BaseController',
     '{page?}'=>'BaseController',
 ]);

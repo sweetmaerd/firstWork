@@ -178,7 +178,7 @@
                             <label for="img" class="col-md-4 control-label">Добавить изображения</label>
 
                             <div class="col-md-6">
-                                <input id="img" type="file"  name="img">
+                                <input id="img" type="file"  name="pict">
 
                                 @if ($errors->has('img'))
                                     <span class="help-block">
