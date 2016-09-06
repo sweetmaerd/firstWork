@@ -20,7 +20,7 @@ Route::get('user/profile', [
 */
 Route::get('/home', 'HomeController@index');
 Route::controllers([
-    '/products'=>'ProductController',
+    '/content'=>'ContentController',
     '/post' => 'HomeController',
     '/auth'=>'Auth\AuthController',
     '/home'=>'HomeController',

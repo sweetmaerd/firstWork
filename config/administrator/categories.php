@@ -12,6 +12,7 @@ return array(
     'form_width'=>500,
     'permission'=> function() {
         return (Auth::user()->role == 'admin')? TRUE:FALSE;
+        return true;
     },
 
     //колонки
@@ -22,9 +23,6 @@ return array(
         ),
         'alias'=> array(
             'title'=>'Подкатегория'
-        ),
-        'description'=> array(
-            'title'=>'Описание'
         ),
         'showhide',
 
@@ -44,8 +42,10 @@ return array(
            // 'name_field' => 'name'
         ),
         'showhide'=>array(
-            'title'=>'Показать/Скрыть'
-        )
+            'title'=>'Видимость',
+            'options' => array('show', 'hide'),
+            'type'=>'enum'
+        ),
     ),
 
     //формы

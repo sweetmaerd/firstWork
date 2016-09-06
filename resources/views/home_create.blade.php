@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Флрма добавления статей</div>
+                <div class="panel-heading">Форма добавления статей</div>
 
                 <div class="panel-body">
                     @if(count($errors))
@@ -58,7 +58,7 @@
                                 <p><select id="categories_id" class="form-control" name="categories_id"  >
 
                                         @foreach($category as $cat)
-                                        <option value= {{ $cat->description }} >{{ $cat->description }}</option>
+                                        <option value= {{ $cat->id }} >{{ $cat->alias }}</option>
                                         @endforeach
                                     </select></p>
 
@@ -70,22 +70,6 @@
                             </div>
                         </div>
                         <!--Конец select categories_id -->
-
-                        <!--Начало input date -->
-                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}" >
-                            <label for="date" class="col-md-4 control-label">Дата мероприятия</label>
-
-                            <div class="col-md-6">
-                                <input id="date" type="date" class="form-control" name="date" value="{{ old('date') }}">
-
-                                @if ($errors->has('date'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('date') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <!--Конец input date -->
 
                         <!--Начало input URL -->
                         <div class="form-group{{ $errors->has('URL') ? ' has-error' : '' }}" >
@@ -104,24 +88,7 @@
                         <!--Конец input URL -->
 
                         <!--Начало input author -->
-                        <div class="form-group{{ $errors->has('author') ? ' has-error' : '' }}" >
-                            <label for="author" class="col-md-4 control-label">Автор статьи</label>
-
-                            <div class="col-md-6">
-                                <p>
-                                    <select id="author" class="form-control" name="author"  >
-                                        @foreach($users as $user)
-                                        <option value= {{ $user->name }} >{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </p>
-                                @if ($errors->has('author'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('author') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        <input type="hidden" name='author' value="{{Auth::user()->name}}">
                         <!--Конец input author -->
 
                         <!--Начало select showhide -->
@@ -147,7 +114,7 @@
 
                         <!--Начало input img -->
                         <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-                            <label for="img" class="col-md-4 control-label">Добавить изображения</label>
+                            <label for="img" class="col-md-4 control-label">Добавить изображение</label>
 
                             <div class="col-md-6">
                                 <input id="img" type="file"  name="picture1">

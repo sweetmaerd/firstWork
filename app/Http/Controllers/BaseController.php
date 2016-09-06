@@ -15,9 +15,9 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex($page= 'resume')
+    public function getIndex($page='1')
     {
-        return view('index',['content'=>'templates.content'.$page]);
+        return view('index');
     }
 
     /**
@@ -38,11 +38,6 @@ class BaseController extends Controller
             'body'=>$body
         ]);
         return 'данные добавлены';
-    }
-    
-    public function getHome()
-    {
-        return 'Домашняя страница. Вам меньше 18!';
     }
 
     /**

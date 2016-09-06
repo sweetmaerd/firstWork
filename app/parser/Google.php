@@ -1,7 +1,7 @@
 <?php
 namespace App\Parser;
 use Symfony\Component\DomCrawler\Crawler;
-use App\Product;
+use App\Content;
 
 class Google implements ParseContract {
     

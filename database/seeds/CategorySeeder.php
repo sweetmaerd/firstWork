@@ -16,71 +16,84 @@ class CategorySeeder extends Seeder
 
             [
                 'name'=>'News',
-                'alias'=>'',
-                'description'=>'News',
+                'parent_id' =>'0',
+                'alias'=>'News',
                 'created_at'=>date('Y.m.d H:i:s')
-
-            ],
-            [
-                'name'=>'News',
-                'alias'=>'Hot',
-                'description'=>'News/Hot',
-                'created_at'=>date('Y.m.d H:i:s')
-
             ],
             [
                 'name'=>'Albums',
-                'alias'=>'EP',
-                'description'=>'Albums/EP',
+                'parent_id' =>'0',
+                'alias'=>'Albums',
                 'created_at'=>date('Y.m.d H:i:s')
 
             ],
             [
-                'name'=>'Albums',
-                'alias'=>'Single',
-                'description'=>'Albums/Singe',
-                'created_at'=>date('Y.m.d H:i:s')
-
-            ],
-            [
-                'name'=>'Albums',
-                'alias'=>'Album',
-                'description'=>'Albums/Album',
-                'created_at'=>date('Y.m.d H:i:s')
-
-            ],
-            [
-                'name'=>'Groups',
+                'name'=>'Belarussian',
+                'parent_id' =>'0',
                 'alias'=>'Belarussian',
-                'description'=>'Groups/Belarussian',
-                'created_at'=>date('Y.m.d H:i:s')
-
-            ],
-            [
-                'name'=>'Groups',
-                'alias'=>'SNG',
-                'description'=>'Groups/SNG',
-                'created_at'=>date('Y.m.d H:i:s')
-
-            ],
-            [
-                'name'=>'Groups',
-                'alias'=>'World',
-                'description'=>'Groups/World',
                 'created_at'=>date('Y.m.d H:i:s')
 
             ],
             [
                 'name'=>'Concerts',
-                'alias'=>'',
-                'description'=>'Concerts',
+                'parent_id' =>'0',
+                'alias'=>'Concerts',
                 'created_at'=>date('Y.m.d H:i:s')
             ],
             [
                 'name'=>'Photos',
-                'alias'=>'',
-                'description'=>'Photos',
+                'parent_id' =>'0',
+                'alias'=>'Photos',
                 'created_at'=>date('Y.m.d H:i:s')
+            ],
+            [
+                'name'=>'Hot',
+                'parent_id' =>'1',
+                'alias'=>'News/Hot',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'EP',
+                'parent_id' =>'2',
+                'alias'=>'Albums/EP',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'Singe',
+                'parent_id' =>'2',
+                'alias'=>'Albums/Singe',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'Album',
+                'parent_id' =>'2',
+                'alias'=>'Albums/Album',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'Groups',
+                'parent_id' =>'3',
+                'alias'=>'Groups/Belarussian',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'SNG',
+                'parent_id' =>'3',
+                'alias'=>'Groups/SNG',
+                'created_at'=>date('Y.m.d H:i:s')
+
+            ],
+            [
+                'name'=>'World',
+                'parent_id' =>'3',
+                'alias'=>'Groups/World',
+                'created_at'=>date('Y.m.d H:i:s')
+
             ],
     ]);
     }

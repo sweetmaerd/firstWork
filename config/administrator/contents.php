@@ -9,19 +9,20 @@ use App\Parser\Google;
 return array(
     'title' => 'Статьи',
     'single' => 'статью',
-    'model' => 'App\Product',
+    'model' => 'App\Content',
     'form_width'=>500,
     'permission'=> function() {
         return (Auth::user()->role == 'admin')? TRUE:FALSE;
+        return true;
     },
 
     //колонки
     'columns'=>array(
-        'id'=>array('width'=>'10px'),
+        'id',
         'img'=>array(
             'title'=>'Изображение',
             'width'=>100,
-            'output'=>"<img src=".'public/media/'.((NULL == ((":value")))?('/default.jpg'):('uploads/(:value)'))." width='50px'/>"
+            'output'=>"<img src=".public_path().'/media/'.((NULL != ((":value")))?('default.jpg'):('uploads/(:value)'))." width='150px'/>"
         ),
         'title'=>array(
             'title'=>'Название'
@@ -29,15 +30,17 @@ return array(
         'categories'=>array(
             'title'=>'Категория',
             'relationship'=>'category',
-            'select'=>'(:table).description'
+            'select'=>'(:table).alias'
             
         ),
         'author'=> array(
             'title'=>'Автор'
         ),
         'showhide'=>array(
-            
-            
+            'title'=>'Видимость'
+        ),
+        'url'=>array(
+            'title'=>'URL'
         )
 
     ),
@@ -56,14 +59,14 @@ return array(
            // 'name_field' => 'name'
         ),
         'showhide'=>array(
-            'title'=>'Показать/Скрыть',
+            'title'=>'Видимость',
             'options' => array('show', 'hide'),
             'type'=>'enum'
         ),
         'category'=>array(
             'title'=>'Категория',
             'type'=>'relationship',
-            'name_field' => 'description'
+            'name_field' => 'alias'
         ),
     ),
 
@@ -89,7 +92,7 @@ return array(
         'category'=>array(
             'title'=>'Категория',
             'type'=>'relationship',
-            'name_field' => 'description'
+            'name_field' => 'alias'
         ),
         'url'=>array(
             'title'=>'ЧПУ адрес',

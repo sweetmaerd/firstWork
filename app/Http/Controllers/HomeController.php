@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Product;
+use App\Content;
 use App\User;
 use App\Category;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +28,6 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
         $this->category = Category::where('showhide','show')->get(); //выбираю категории с параметном show
-        $this->users = User::select('name')->get(); //выбираю админов
     }
 
     /**
@@ -38,7 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $content = Product::paginate($pag = 5); //применяю пагиницию для контента
+        $content = Content::paginate($pag = 5); //применяю пагиницию для контента
         return view('home')->with(['category'=> $this->category, 'content'=>$content]);//загружаю шаблон home
     }
     public function getPagin($pag)
@@ -47,49 +46,38 @@ class HomeController extends Controller
         return redirect('/home')->with('pag',$pag);//редирект на home
     }
     
-    public function postIndex(Requests\ProductRequest $r)
+    public function postIndex(Requests\ContentRequest $r)
     {
         $this->picture($r);
-        Product::create($r->all());//добавляю запись в БД в таблицу Products
+        Content::create($r->all());//добавляю запись в БД в таблицу Products
         return redirect('/home');//редирект на home
     }
     
     public function getDelete($id)
     {
-        Product::where('id',$id)->delete();//удаляю зарись из таблицы Products БД
+        Content::where('id',$id)->delete();//удаляю зарись из таблицы Products БД
         return redirect('/home');//редирект на home
     }
 
     public function getUpdate($id)
     {
-        $entery = Product::where('id',$id)->get();//получаю запись с параметром ID из таблицы Products БД
-        return view('home_update')->with(['entery'=>$entery[0],'users'=> $this->users, 'category'=>$this->category]);//загружаю шаблон home_update
+        $entery = Content::where('id',$id)->get();//получаю запись с параметром ID из таблицы Products БД
+        return view('home_update')->with(['entery'=>$entery[0], 'category'=>$this->category]);//загружаю шаблон home_update
     }
 
-    public function postUpdate(Requests\ProductRequest $r, $id)
+    public function postUpdate(Requests\ContentRequest $r, $id)
     {
         $this->picture($r);
         $cont = collect($r->all());
         $cont->pop();
         $cont->all();
-        Product::where('id',$id)->update($cont->all());//обновляю запись с параметром ID в таблице Products БД
+        Content::where('id',$id)->update($cont->all());//обновляю запись с параметром ID в таблице Products БД
         return redirect('/home');//редирект на home
     }
 
     public function getCreate()
     {
-        return view('home_create')->with(['category'=> $this->category, 'users'=> $this->users]);//загружаю шаблон home_create
-    }
-
-    public function getPage($id)
-    {
-        if(is_numeric($id)) {
-            $row = 'id';
-        } else {
-            $row = 'url';
-        }
-        $post = Product::where($row,$id)->first();
-        return view('home_content')->with(['post'=> $post]);//загружаю шаблон home_comtent
+        return view('home_create')->with(['category'=> $this->category]);//загружаю шаблон home_create
     }
 
     public function picture(&$r)

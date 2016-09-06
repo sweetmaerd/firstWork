@@ -14,9 +14,9 @@ class Categories extends Migration
     {
         Schema::create('categories', function ($table) {
             $table->increments('id');
+            $table->integer('parent_id');
             $table->string('name', 20);
-            $table->string('alias', 15)->nullable();
-            $table->text('description');
+            $table->string('alias', 20);
             $table->enum('showhide', array('show', 'hide'))->default('show');
             $table->enum('lang', array('ru', 'en'))->default('ru');
             $table->rememberToken();

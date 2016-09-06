@@ -7,6 +7,7 @@ return array(
     'form_width'=>500,
     'permission'=> function() {
         return (Auth::user()->role == 'admin')? TRUE:FALSE;
+        return true;
     },
     
 
@@ -21,8 +22,7 @@ return array(
         ),
         'role'=>array(
             'title'=>'Роль',
-        ),
-        'select' => "WHERE((:table).id=Auth::user()->id)",
+        )
 
     ),
 

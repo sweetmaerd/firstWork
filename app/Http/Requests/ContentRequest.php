@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ProductRequest extends Request
+class ContentRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,10 @@ class ProductRequest extends Request
     {
         return [
             "title" => 'required|max:150',
-            "categories_id" => 'required|string',
+            "categories_id" => 'required|integer',
             "description" => 'required|min:5',
             "img" => 'image|max:500',
-            "date" => 'date|after:date()|required_if:categories_id,Concerts',
-            "url" => 'alpha_dash|unique:Contents',
-            "author" => 'required|max:30',
+            "url" => 'alpha_dash|unique:Contents'
         ];
     }
 }
