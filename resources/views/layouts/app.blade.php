@@ -45,7 +45,8 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav" >
-                <li><a class="navbar-brand" href="{{ url('/home') }}">Панель администратора</a></li>
+                <li><a class="navbar-brand" href="{{ url('/home') }}">Панель пользователя</a></li>
+                <li><a class="navbar-brand" href="{{ url('/admin') }}">Панель панель администратора</a></li>
                 <li><a class="navbar-brand" href="{{ url('/home/create') }}">Добавить запись</a></li>
             </ul>
 

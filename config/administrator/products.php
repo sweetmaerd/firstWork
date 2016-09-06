@@ -1,4 +1,5 @@
 <?php
+use App\Parser\Google;
 /**
  * Created by PhpStorm.
  * User: SRZAI
@@ -6,10 +7,13 @@
  * Time: 20:25
  */
 return array(
-    'title' => 'Товар',
-    'single' => 'товар',
+    'title' => 'Статьи',
+    'single' => 'статью',
     'model' => 'App\Product',
     'form_width'=>500,
+    'permission'=> function() {
+        return (Auth::user()->role == 'admin')? TRUE:FALSE;
+    },
 
     //колонки
     'columns'=>array(
@@ -17,18 +21,50 @@ return array(
         'img'=>array(
             'title'=>'Изображение',
             'width'=>100,
-            'output'=>"<img src=".url('public/media/uploads'.(((":value")!=null)?'/(:value)':'/default.jpg'))." width='50px'/>"
+            'output'=>"<img src=".'public/media/'.((NULL == ((":value")))?('/default.jpg'):('uploads/(:value)'))." width='50px'/>"
         ),
-        'title',
-        'categories',
-        'author',
-        'showhide',
+        'title'=>array(
+            'title'=>'Название'
+        ),
+        'categories'=>array(
+            'title'=>'Категория',
+            'relationship'=>'category',
+            'select'=>'(:table).description'
+            
+        ),
+        'author'=> array(
+            'title'=>'Автор'
+        ),
+        'showhide'=>array(
+            
+            
+        )
 
     ),
 
     //фильтры
     'filters'=>array(
-        'id','title','author','showhide','date'
+        'id'=>array(
+            'title'=>'ID статьи',
+        ),
+        'title'=> array(
+            'title'=>'Низвание статьи',
+        ),
+        'author'=>array(
+            //'type'=>'relationship',
+            'title'=>'Автор',
+           // 'name_field' => 'name'
+        ),
+        'showhide'=>array(
+            'title'=>'Показать/Скрыть',
+            'options' => array('show', 'hide'),
+            'type'=>'enum'
+        ),
+        'category'=>array(
+            'title'=>'Категория',
+            'type'=>'relationship',
+            'name_field' => 'description'
+        ),
     ),
 
     //формы
@@ -47,16 +83,39 @@ return array(
             'naming'=>'random',
             'lenght'=>20,
             'size'=>array(
-                array(200,150,'landscape',url('public/media/uploads/s_'),100)
+                array(200,150,'landscape','public/media/uploads/s_',100)
             )
         ),
-        'author'=>array(
-            'title'=> 'Автор',
-            //'type'=>'select',
+        'category'=>array(
+            'title'=>'Категория',
+            'type'=>'relationship',
+            'name_field' => 'description'
+        ),
+        'url'=>array(
+            'title'=>'ЧПУ адрес',
+            'type'=>'text',
+            'limit'=>'30'
         ),
         'showhide'=>array(
             'title'=> 'Видимость',
-            //'type'=>'select'
+            'options' => array('show', 'hide'),
+            'type'=>'enum'
         ),
+    ),
+    
+    'global_actions'=>array(
+        'parse'=>array(
+            'title'=>'Найти изображение в Google',
+            'message'=>array(
+                'active'=>'Идет поиск изображения',
+                'success'=>'Успешно',
+                'error'=>'Ошибка'
+            ),
+            'action'=>function(&$data){
+                $prods=$data->where('img','')->get();
+                $obj = new Google();
+                $obj->getParse($prods);
+            }
+        )
     )
 );

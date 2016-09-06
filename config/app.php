@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -113,7 +113,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Intervention\Image\ImageServiceProvider::class,
+        
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -137,7 +137,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Frozennode\Administrator\AdministratorServiceProvider::class,
+        
 
         /*
          * Application Service Providers...
@@ -146,6 +146,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        Frozennode\Administrator\AdministratorServiceProvider::class
+        //Intervention\Image\ImageServiceProvider::class,
 
     ],
 

@@ -97,7 +97,7 @@ class HomeController extends Controller
         $pict = Input::file('picture1');
         $dir = '/media/uploads/';
         $time = time();
-        $pic = \App::make('\App\Libs\ImagesClass')->url($pict, $dir, $time);
+        $pic = \App::make('\App\Libs\ImagesClass')->urlGet($pict, $dir, $time);
         if($pic) {
             $r['img'] = $pic;
         }

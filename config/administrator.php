@@ -35,14 +35,14 @@ return array(
 	 *
 	 * @type string
 	 */
-	'model_config_path' => config_path('administrator'),
+	'model_config_path' => '../config/administrator',
 
 	/**
 	 * The path to your settings config directory
 	 *
 	 * @type string
 	 */
-	'settings_config_path' => config_path('administrator/settings'),
+	'settings_config_path' => '../config/administrator/settings',
 
 	/**
 	 * The menu structure of the site. For models, you should either supply the name of a model config file or an array of names of model config
@@ -66,7 +66,9 @@ return array(
 	 *	)
 	 */
 	'menu' => array(
-        'products'
+        'products',
+        'categories',
+        'users'
     ),
 
 	/**
@@ -100,7 +102,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'home_page' => '/admin/products',
+	'home_page' => 'products',
 
 	/**
 	 * The route to which the user will be taken when they click the "back to site" button

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class FirstMiddleware
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,8 @@ class FirstMiddleware
      */
     public function handle($request, Closure $next)
     {   
-        if($request->input('age')<18){
-            //return('home')
+        function() {
+           return (Auth::user()->role == 'admin') ? true : false;
         }
-        return $next($request);
     }
 }

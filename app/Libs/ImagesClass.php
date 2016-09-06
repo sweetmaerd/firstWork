@@ -17,7 +17,7 @@ class ImagesClass {
 
     }
 
-    public function url($path = null,$dir = null, $name = null) {
+    public function urlGet($path = null,$dir = null, $name = null) {
         if($path != null){
             $filename = $name.".jpg";
             $dir =  public_path().$dir;
