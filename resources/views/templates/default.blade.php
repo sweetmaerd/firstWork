@@ -63,9 +63,10 @@
 
                 <span><h1>BelHard work</h1></span>
                 <ul id="main-nav">
-                    <li class="current"><a href={{url("/content")}}>Контент</a></li>
+                    <li class="current"><a href={{url("/content")}}>Товары</a></li>
                     <li class="current"><a href={{url("/home")}}>Кабинет пользователя</a></li>
                     <li class="current"><a href={{url("/admin")}}>Админка</a></li>
+                    <li class="current"><a href={{url("/basket")}} >Корзина<span class="badge"><?=(isset($_COOKIE['counts'])) ? $_COOKIE['counts']:0; ?></span></a></li>
                 </ul>
                 <div class="clear"></div>
 

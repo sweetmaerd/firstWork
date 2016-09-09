@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Collection;
+use Event;
+use App\Events\AddEmail;
+use App\Order;
+use Illuminate\Support\Facades\Redirect;
+
 
 
 class HomeController extends Controller
@@ -38,6 +43,7 @@ class HomeController extends Controller
     public function index()
     {
         $content = Content::paginate($pag = 5); //применяю пагиницию для контента
+        Event::fire(new AddEmail(Auth::user()->id,'Привет. Посмотри, может найдешь что-то интересное'));
         return view('home')->with(['category'=> $this->category, 'content'=>$content]);//загружаю шаблон home
     }
     public function getPagin($pag)
@@ -80,6 +86,20 @@ class HomeController extends Controller
         return view('home_create')->with(['category'=> $this->category]);//загружаю шаблон home_create
     }
 
+    public function getOrders()
+    {
+        $orders = Order::where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        return view('home_orders')->with(['orders'=> $orders->all()]);//загружаю шаблон home_orders
+    }
+
+    public function getOrder($id)
+    {
+        $order = Order::where(['user_id'=>Auth::user()->id,'id'=>$id])->first();
+        $tov = $this->cook_arr($order->zakaz);
+        //dd($order);
+        return view('home_order')->with(['order'=> $order, 'tov'=>$tov]);//загружаю шаблон home_order
+    }
+
     public function picture(&$r)
     {
         $pict = Input::file('picture1');
@@ -90,4 +110,16 @@ class HomeController extends Controller
             $r['img'] = $pic;
         }
     }
+    public function cook_arr($cook){
+        $big_arr = explode(',',$cook);
+        foreach($big_arr as $k=>$v) {
+            $lit_arr = explode(':',$v);
+            if($lit_arr[0]!=null){
+                $tov[$lit_arr[0]] = Content::find($lit_arr[0]);
+                $tov[$lit_arr[0]]['count'] = $lit_arr[1];
+            }
+        }
+        return $tov;
+    }
+
 }

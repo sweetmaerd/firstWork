@@ -48,6 +48,7 @@
                 <li><a class="navbar-brand" href="{{ url('/home') }}">Панель пользователя</a></li>
                 <li><a class="navbar-brand" href="{{ url('/admin') }}">Панель панель администратора</a></li>
                 <li><a class="navbar-brand" href="{{ url('/home/create') }}">Добавить запись</a></li>
+                <li><a class="navbar-brand" href="{{ url('/home/orders') }}">Заказы</a></li>
             </ul>
 
                 <!-- Right Side Of Navbar -->

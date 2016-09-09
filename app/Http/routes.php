@@ -20,6 +20,8 @@ Route::get('user/profile', [
 */
 Route::get('/home', 'HomeController@index');
 Route::controllers([
+    '/redirect'=>'RedirectController',
+    '/basket'=>'BasketController',
     '/content'=>'ContentController',
     '/post' => 'HomeController',
     '/auth'=>'Auth\AuthController',

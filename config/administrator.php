@@ -68,7 +68,8 @@ return array(
 	'menu' => array(
         'contents',
         'categories',
-        'users'
+        'users',
+        'orders'
     ),
 
 	/**

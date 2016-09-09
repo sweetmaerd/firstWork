@@ -12,7 +12,6 @@ return array(
     'form_width'=>500,
     'permission'=> function() {
         return (Auth::user()->role == 'admin')? TRUE:FALSE;
-        return true;
     },
 
     //колонки

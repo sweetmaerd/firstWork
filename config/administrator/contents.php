@@ -13,16 +13,15 @@ return array(
     'form_width'=>500,
     'permission'=> function() {
         return (Auth::user()->role == 'admin')? TRUE:FALSE;
-        return true;
     },
 
     //колонки
     'columns'=>array(
         'id',
         'img'=>array(
-            'title'=>'Изображение',
+            'title'=>'Изображения',
             'width'=>100,
-            'output'=>"<img src=".public_path().'/media/'.((NULL != ((":value")))?('default.jpg'):('uploads/(:value)'))." width='150px'/>"
+            'output'=>"<img src=".public_path().'/media/'.('/' != ((":value"))?"uploads/(:value)":"default.jpg")." width='100px' alt=(:value)/>"
         ),
         'title'=>array(
             'title'=>'Название'
@@ -86,7 +85,7 @@ return array(
             'naming'=>'random',
             'lenght'=>20,
             'size'=>array(
-                array(200,150,'landscape','public/media/uploads/s_',100)
+                array(200,150,'landscape','../public/media/uploads/s_',100)
             )
         ),
         'category'=>array(
