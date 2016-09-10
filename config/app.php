@@ -146,9 +146,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+        App\Providers\ViewServiceProvider::class,
+
         Frozennode\Administrator\AdministratorServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        That0n3guy\Transliteration\TransliterationServiceProvider::class
 
     ],
 

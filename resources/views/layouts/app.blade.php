@@ -49,6 +49,7 @@
                 <li><a class="navbar-brand" href="{{ url('/admin') }}">Панель панель администратора</a></li>
                 <li><a class="navbar-brand" href="{{ url('/home/create') }}">Добавить запись</a></li>
                 <li><a class="navbar-brand" href="{{ url('/home/orders') }}">Заказы</a></li>
+
             </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -58,6 +59,7 @@
                     <li><a  href="{{ url('/auth/login') }}"><span class="glyphicon glyphicon-log-in">Войти</span></a></li>
                     <li><a  href="{{ url('/auth/register') }}"><span class="glyphicon glyphicon-user">Зарегистрироваться</span></a></li>
                     @else
+                    <li><p class="navbar-brand pull-right">{{$test}}</p></li>
                     <li><a  href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out">Выход</span></a></li>
                     @endif
                 </ul>
@@ -66,7 +68,6 @@
 
     </div>
 </nav>
-
     @yield('form')
     @yield('content')
     @section('scripts')

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+//use That0n3guy\Transliteration\Transliteration;
+use That0n3guy\Transliteration\Facades\Transliteration;
 
 class BaseController extends Controller
 {

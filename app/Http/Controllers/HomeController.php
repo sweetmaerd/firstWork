@@ -7,15 +7,16 @@ use App\Content;
 use App\User;
 use App\Category;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+//use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Collection;
+//use Illuminate\Support\Collection;
 use Event;
 use App\Events\AddEmail;
 use App\Order;
-use Illuminate\Support\Facades\Redirect;
+//use Illuminate\Support\Facades\Redirect;
+use That0n3guy\Transliteration\Facades\Transliteration;
 
 
 
@@ -55,7 +56,13 @@ class HomeController extends Controller
     public function postIndex(Requests\ContentRequest $r)
     {
         $this->picture($r);
-        Content::create($r->all());//добавляю запись в БД в таблицу Products
+        $cont = collect($r->all());
+        if(!$cont['url']) {
+            $cont['url'] = Transliteration::clean_filename($cont['title']);
+        } else {
+            $cont['url'] = Transliteration::clean_filename($cont['url']);
+        }
+        Content::create($cont->all());//добавляю запись в БД в таблицу Products
         return redirect('/home');//редирект на home
     }
     
@@ -76,7 +83,11 @@ class HomeController extends Controller
         $this->picture($r);
         $cont = collect($r->all());
         $cont->pop();
-        $cont->all();
+        if(!$cont['url']) {
+            $cont['url'] = Transliteration::clean_filename($cont['title']);
+        } else {
+            $cont['url'] = Transliteration::clean_filename($cont['url']);
+        }
         Content::where('id',$id)->update($cont->all());//обновляю запись с параметром ID в таблице Products БД
         return redirect('/home');//редирект на home
     }

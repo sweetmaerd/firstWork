@@ -2,18 +2,13 @@
 
 
 
-## Official Documentation
+## Установка
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+- Клонируем проект: git clone https://github.com/sweetmaerd/firstWork.git {yourDirectory}
+- Переходим в папку с проектом: cd {yourDirectory}
+- Устанавливаем проект: composer install
+- При необходимости переименовываем .env.example в .env и настраиваем параметры соединения с БД предварительно создав базу данных
+- Прописываем в консоли php artisan vendor:publish
+- Вызываем миграции и сиды(по необходимости). В таблице users создается пользователь с правами администратора: login:admin password:123456
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
