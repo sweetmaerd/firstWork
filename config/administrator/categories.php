@@ -1,22 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: SRZAI
- * Date: 02.09.16
- * Time: 20:25
- */
 return array(
     'title' => 'Категории',
     'single' => 'категорию',
     'model' => 'App\Category',
     'form_width'=>500,
     'permission'=> function() {
-        return (Auth::user()->role == 'admin')? TRUE:FALSE;
+        return (Auth::user()->role_id == '1')? TRUE:FALSE;
     },
 
     //колонки
     'columns'=>array(
         'id'=>array('width'=>'10px'),
+        'parent_id'=>array(
+            'title'=>'Подкатегория'
+        ),
         'name'=>array(
             'title'=>'Категория'
         ),
@@ -32,13 +29,16 @@ return array(
         'id'=>array(
             'title'=>'ID категории',
         ),
+        'parent_id'=>array(
+            'title'=>'Подкатегория'
+        ),
         'name'=> array(
             'title'=>'Категория',
         ),
         'alias'=>array(
             //'type'=>'relationship',
             'title'=>'Подкатегория',
-           // 'name_field' => 'name'
+            //'name_field' => ''
         ),
         'showhide'=>array(
             'title'=>'Видимость',
@@ -49,12 +49,12 @@ return array(
 
     //формы
     'edit_fields' => array(
+
+        'parent_id'=>array(
+            'title'=>'Подкатегория'
+        ),
         'name' => array(
             'title'=>'Название категории',
-        ),
-        'description'=>array(
-            'title'=> 'Описание',
-            'type'=>'textarea'
         ),
         'alias'=>array(
             //'type'=>'relationship',
@@ -63,8 +63,8 @@ return array(
         ),
         'showhide'=>array(
             'title'=> 'Видимость',
-            //'type'=>'relationship',
-            //'name_field' => 'name'
+            'options' => array('show', 'hide'),
+            'type'=>'enum'
         ),
     )
 );

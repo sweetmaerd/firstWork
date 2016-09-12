@@ -38,6 +38,7 @@
     <script type="text/javascript" src={{asset("js/jquery.quicksand-config.js")}}></script>
 
     <script type="text/javascript" src={{asset("js/scripts.js")}}></script>
+    <title><?=(isset($title)?$title:''); ?></title>
 
 
 
@@ -55,7 +56,7 @@
                 <li><a  href="{{ url('/auth/login') }}"><span class="glyphicon glyphicon-log-in">Войти</span></a></li>
                 <li><a  href="{{ url('/auth/register') }}"><span class="glyphicon glyphicon-user">Зарегистрироваться</span></a></li>
                 @else
-                <li>Привет {{Auth::user()->name}}<a  href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out">выйти?</span></a></li>
+                <li ><a  href="{{ url('/auth/logout') }}">{{$test.' '}} <span class="glyphicon glyphicon-log-out">выйти?</span></a></li>
                 @endif
             </ul>
             <div id="header">
@@ -66,7 +67,7 @@
                     <li class="current"><a href={{url("/content")}}>Товары</a></li>
                     <li class="current"><a href={{url("/home")}}>Кабинет пользователя</a></li>
                     <li class="current"><a href={{url("/admin")}}>Админка</a></li>
-                    <li class="current"><a href={{url("/basket")}} >Корзина<span class="badge"><?=(isset($_COOKIE['counts'])) ? $_COOKIE['counts']:0; ?></span></a></li>
+                    <li class="current"><a href={{url("/basket")}} >Корзина<span class="badge"><?=(isset($count)) ? $count:0; ?></span></a></li>
                 </ul>
                 <div class="clear"></div>
 

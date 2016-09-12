@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class Roles extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,10 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('roles', function ($table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('fio');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('zakaz');
-            $table->string('status');
-            $table->integer('counts');
-            $table->string('_token');
+            $table->string('name', 20);
+            $table->enum('showhide', array('show', 'hide'))->default('show');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -34,6 +28,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('orders');
+        Schema::drop('roles');
     }
 }

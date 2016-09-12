@@ -8,6 +8,7 @@ class Category extends Model
 {
     protected $table = 'categories';
     protected $fillable = [
+        'name','alias','showhide','parent_id'
     ];
     
     public function content()

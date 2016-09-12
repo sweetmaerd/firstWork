@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Providers\ViewComposer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;

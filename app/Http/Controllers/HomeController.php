@@ -44,7 +44,7 @@ class HomeController extends Controller
     public function index()
     {
         $content = Content::paginate($pag = 5); //применяю пагиницию для контента
-        Event::fire(new AddEmail(Auth::user()->id,'Привет. Посмотри, может найдешь что-то интересное'));
+        //Event::fire(new AddEmail(Auth::user()->id,'Привет. Посмотри, может найдешь что-то интересное'));
         return view('home')->with(['category'=> $this->category, 'content'=>$content]);//загружаю шаблон home
     }
     public function getPagin($pag)

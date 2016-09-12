@@ -17,7 +17,7 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex($page='1')
+    public function getIndex()
     {
         return view('index');
     }

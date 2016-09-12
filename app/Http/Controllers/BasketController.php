@@ -9,40 +9,44 @@ use App\Content;
 use App\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Event;
+use App\Events\AddEmail;
 
 class BasketController extends Controller
 {
     public $tov=[];
-    public $count=0;
+    static public $count=0;
 
     public function getIndex(){
-        $tov = $this->cook_arr();
+        //if($status=='good')
+        $tov = self::cook_arr();
         return view('basket')->with(['tov'=>$tov]);
     }
 
     public function postAdd($id=null){
         return ($this->getDeleted($id,$_POST['count'],false));
+
     }
 
     public function getAdded($count,$id=null){
         $this->tov[$id] = $count;
-        $this->cook_add($this->tov,$id);
+        self::cook_add($this->tov,$id);
         return redirect('/basket');
     }
 
     public function cook_add($tov=[],$id){
-        $str = $this->checkCookie();
+        $str = self::checkCookie();
         foreach($tov as $k_id=>$count) {//устанавливаем COOKIE
             $str .= $k_id.':'.$count.',';
         }
         setCookie('basket', $str,time()+3600,'/');
     }
 
-    public function cook_arr(){
-        $cook = $this->checkCookie();
+    static public function cook_arr(){
+        $cook = self::checkCookie();
         if(!$cook) {
             setcookie('counts','0',time()+3600,'/');
-            return;
+            return 0;
         };
         $big_arr = explode(',',$cook);
         foreach($big_arr as $k=>$v) {
@@ -50,16 +54,16 @@ class BasketController extends Controller
             if($lit_arr[0]!=null){
                 $tov[$lit_arr[0]] = Content::find($lit_arr[0]);
                 $tov[$lit_arr[0]]['count'] = $lit_arr[1];
-                $this->count += 1;
+                self::$count += 1;
             }
         }
-        setcookie('counts',$this->count,time()+3600,'/');
+        setcookie('counts',self::$count,time()+3600,'/');
 
         return $tov;
     }
 
     public function getDeleted($id=null,$count = null,$red=TRUE) {
-        $str = $this->checkCookie();
+        $str = self::checkCookie();
         $big_arr = explode(',',$str);
         $strco = '';
         foreach($big_arr as $key=>$v) {
@@ -80,7 +84,7 @@ class BasketController extends Controller
         }
     }
 
-    public function checkCookie() {
+    public static function checkCookie() {
         return (isset($_COOKIE['basket']))?$_COOKIE['basket']:'';
     }
     public function postBuy(Requests\OrderRequest $r) {
@@ -88,7 +92,8 @@ class BasketController extends Controller
         $arr['counts'] = $_COOKIE['counts'];
         Order::insert($arr);
         setcookie('basket',null,time()-1,'/');
-        return redirect('/')->with('status','good');
+        Event::fire(new AddEmail($arr['user_id'],' сделал заказ №',Order::where('user_id',$arr['user_id'])->first()));
+        return redirect('/');
     }
 
 }

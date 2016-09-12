@@ -1,6 +1,7 @@
 @extends('templates.default')
 
 @section('content')
+
 @if($tov == 0)
     {{'Корзина пуста, но вы можете выбрать товар в '}}<a href="{{asset('/content')}}">каталоге</a>
 @else
@@ -25,10 +26,10 @@
                 </th>
                 <th>{{ $v->title }}</th>
                 <th>
-                    <form id="count" action="{{asset('/basket/add/'.$v->id)}}" lass="form-horizontal" role="form" method="POST">
+                    <form id="count" action="{{asset('/basket/add/'.$v->id)}}" class="form-horizontal" role="form" method="POST">
                         {{csrf_field()}}
                         <ul style="display:inline">
-                            <li style="float:left"><input id="order" size='20' type="number" class="form-control" name="count" value="{{$v->count}}"></li>
+                            <li style="float:left"><input id="count" size='20' type="number" class="form-control" name="count" value="{{$v->count}}"></li>
                             <li style="float:left"><input id="count" type="submit" class="btn btn-primary" value='Обновить' ></li>
                         </ul>
                     </form>
@@ -93,7 +94,7 @@
         <label for="order" class="col-md-4 control-label">Телефон</label>
 
         <div class="col-md-6">
-            <input id="fio" type="phone" class="form-control" name="phone" placeholder="Введи номер телефона" value=
+            <input id="fio" type="string" class="form-control" name="phone" placeholder="Введи номер телефона" value=
             @if(count($errors))
             " {{ old('phone') }} ";
             @endif

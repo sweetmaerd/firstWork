@@ -69,7 +69,8 @@ return array(
         'contents',
         'categories',
         'users',
-        'orders'
+        'orders',
+		'roles'
     ),
 
 	/**

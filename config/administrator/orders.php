@@ -1,5 +1,5 @@
 <?php
-use App\Parser\Google;
+
 /**
  * Created by PhpStorm.
  * User: SRZAI
@@ -12,7 +12,7 @@ return array(
     'model' => 'App\Order',
     'form_width'=>500,
     'permission'=> function() {
-        return (Auth::user()->role == 'admin')? TRUE:FALSE;
+        return (Auth::user()->role_id == '1')? TRUE:FALSE;
     },
 
     //колонки

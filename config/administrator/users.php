@@ -6,8 +6,7 @@ return array(
     'model' => 'App\User',
     'form_width'=>500,
     'permission'=> function() {
-        return (Auth::user()->role == 'admin')? TRUE:FALSE;
-        return true;
+        return (Auth::user()->role_id == '1')? TRUE:FALSE;
     },
     
 
@@ -20,8 +19,11 @@ return array(
         'email'=> array(
             'title'=>'E-mail'
         ),
-        'role'=>array(
+        'roles'=>array(
             'title'=>'Роль',
+            'relationship'=>'role',
+            'select' => '(:table).name'
+
         )
 
     ),
@@ -40,7 +42,9 @@ return array(
            // 'name_field' => 'name'
         ),
         'role'=>array(
-            'title'=>'Роль'
+            'title'=>'Роль',
+            'type'=>'relationship',
+            'name_field' => 'name'
         )
     ),
 
@@ -53,9 +57,9 @@ return array(
             'title'=> 'E-mail'
         ),
         'role'=>array(
-            //'type'=>'relationship',
             'title'=>'Роль',
-            // 'name_field' => 'name'
+            'type'=>'relationship',
+            'name_field' => 'name'
         )
     )
 );

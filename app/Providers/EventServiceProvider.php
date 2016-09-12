@@ -15,7 +15,9 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\AddEmail' => [
-            'App\Listeners\Event@handle',
+            'App\Listeners\Event',
+            'App\Listeners\EventOrder',
+
         ],
     ];
 
@@ -28,10 +30,11 @@ class EventServiceProvider extends ServiceProvider
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-        User::creating(function($user){
-            //dd($user);
-            mail($user->email,'Привет','Привет ты пытаешься зарегатся');
-        });
+       //dd($event->user_id);
+       // User::creating(function($user){
+           // dd($user);
+          //  mail($user->email,'Привет','Привет ты пытаешься зарегатся');
+       // });
         //
     }
 }
