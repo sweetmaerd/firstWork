@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Auth;
 
 class Contents extends Migration
 {
@@ -17,7 +18,7 @@ class Contents extends Migration
             $table->increments('id');
             $table->string('title', 120);
             $table->text('description');
-            $table->text('img');
+            $table->string('img')->default('default.jpg');
             $table->string('url', 120);
             $table->integer('categories_id');
             $table->string('author',30);

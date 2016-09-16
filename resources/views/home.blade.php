@@ -27,8 +27,7 @@
                                     @foreach($content as $v)
                                         <tr>
                                             <th>
-                                                <?php $image = $v->img ? ('uploads/s_'.$v->img):'default.jpg' ?>
-                                                <img src="{{ asset('/public/media/'.$image) }}" class="img-circle" width="100" height="100"" >
+                                                <img src="{{ asset('/public/media/uploads/'.$v->img) }}" class="img-circle" width="100" height="100"" >
                                             </th>
                                             <th>{{ $v->id }}</th>
                                             <th>{{ $v->title }}</th>

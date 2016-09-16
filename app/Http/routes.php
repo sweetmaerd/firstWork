@@ -21,12 +21,12 @@ Route::get('user/profile', [
 Route::get('/home', 'HomeController@index');
 Route::controllers([
     '/basket'=>'BasketController',
+    '/ajax'=>'AjaxController',
     '/content'=>'ContentController',
     '/post' => 'HomeController',
     '/auth'=>'Auth\AuthController',
     '/home'=>'HomeController',
-    'crud'=>'BaseController',
-    '{page?}'=>'BaseController'
+    '/{page?}'=>'BaseController'
 ]);
 
 

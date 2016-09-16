@@ -961,3 +961,46 @@ p.loading {
 h1.mail-sent {
 	color:#000;
 }
+
+.modal-window{
+	top: 150px;
+	left: 50%;
+	width: 600px;
+	margin-left: -300px;
+	position: fixed;
+	padding: 20px;
+	border: solid 1px black;
+	background: white;
+	border-radius: 6px;;
+	z-index:98;
+	box-shadow: 1px 1px 5px black;
+}
+
+.black-list{
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.img-thumbnail{
+	width: 200px;
+	height: 100% !important;
+
+}
+div.index_content{
+	border: solid 1px black !important;
+	margin-top: 10px;
+}
+#title>h3{
+	margin: 0px;
+	width: 100%;
+}
+#about{
+	align-content: right;
+ }
+.text_content{
+	margin: 0 17px 2px 17px;
+}

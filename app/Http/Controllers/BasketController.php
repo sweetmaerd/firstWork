@@ -92,7 +92,7 @@ class BasketController extends Controller
         $arr['counts'] = $_COOKIE['counts'];
         Order::insert($arr);
         setcookie('basket',null,time()-1,'/');
-        Event::fire(new AddEmail($arr['user_id'],' сделал заказ №',Order::where('user_id',$arr['user_id'])->first()));
+        Event::fire(new AddEmail($arr['user_id'],' сделал заказ №',Order::where('user_id',$arr['user_id'])->get()->last()));
         return redirect('/');
     }
 

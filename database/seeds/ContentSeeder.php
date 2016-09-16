@@ -16,6 +16,7 @@ class ContentSeeder extends Seeder
             'title'=>'Добро пожаловать на сайт',
             'description'=>'Первая статья на сайте firstwork by Ivan',
             'url'=>'first_page',
+            'img'=>'default.jpg',
             'categories_id'=>'1',
             'author'=>'Admin',
             'created_at'=>date('Y.m.d H:i:s')

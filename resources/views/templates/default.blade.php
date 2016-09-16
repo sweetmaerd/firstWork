@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>THEMELOCK.COM - Retail Only Themes & Templates</title>
+
 
     <link rel="stylesheet" type="text/css" media="print" href={{asset('css/print.css')}}  />
 
@@ -23,7 +23,8 @@
     <!--[if lt IE 7]><link rel="stylesheet" type="text/css" media="screen" href="css/ie-fix.css" /><![endif]-->
 
 
-    <script type="text/javascript" src={{asset("js/jquery-1.5.2.min.js")}}></script>
+    <script type="text/javascript" src={{asset("js/jquery-3.1.0.min.js")}}></script>
+    <script type="text/javascript" src={{asset("js/module.js")}}></script>
 
     <script type="text/javascript" src={{asset("js/jquery.tweet.js")}}></script>
 
@@ -64,8 +65,9 @@
 
                 <span><h1>BelHard work</h1></span>
                 <ul id="main-nav">
+                    <li class="current"><a href={{url("/")}}>Главная</a></li>
                     <li class="current"><a href={{url("/content")}}>Товары</a></li>
-                    <li class="current"><a href={{url("/home")}}>Кабинет пользователя</a></li>
+                    <li class="current"><a href={{url("/home")}}>Кабинет</a></li>
                     <li class="current"><a href={{url("/admin")}}>Админка</a></li>
                     <li class="current"><a href={{url("/basket")}} >Корзина<span class="badge"><?=(isset($count)) ? $count:0; ?></span></a></li>
                 </ul>

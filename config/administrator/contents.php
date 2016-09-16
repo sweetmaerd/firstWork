@@ -1,5 +1,6 @@
 <?php
 use App\Parser\Google;
+use Illuminate\Support\Facades\Auth;
 /**
  * Created by PhpStorm.
  * User: SRZAI
@@ -21,7 +22,7 @@ return array(
         'img'=>array(
             'title'=>'Изображения',
             'width'=>100,
-            'output'=>"<img src=".public_path().'/media/'.('/' != ((":value"))?"uploads/(:value)":"default.jpg")." width='100px' alt=(:value)/>"
+            'output'=>"<img src=/public/media/uploads/(:value) width='100px' >"
         ),
         'title'=>array(
             'title'=>'Название'
