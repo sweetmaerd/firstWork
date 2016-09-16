@@ -7,15 +7,11 @@ use App\Content;
 use App\User;
 use App\Category;
 use Illuminate\Support\Facades\DB;
-//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-//use Illuminate\Support\Collection;
 use Event;
 use App\Events\AddEmail;
 use App\Order;
-//use Illuminate\Support\Facades\Redirect;
 use That0n3guy\Transliteration\Facades\Transliteration;
 
 
@@ -24,7 +20,6 @@ class HomeController extends Controller
 {
 
     protected $category;
-    public static $pag = 5;
     /**
      * Create a new controller instance.
      *
@@ -43,14 +38,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $content = Content::paginate($pag = 5); //применяю пагиницию для контента
+        $content = Content::paginate(); //применяю пагиницию для контента
         //Event::fire(new AddEmail(Auth::user()->id,'Привет. Посмотри, может найдешь что-то интересное'));
         return view('home')->with(['category'=> $this->category, 'content'=>$content]);//загружаю шаблон home
-    }
-    public function getPagin($pag)
-    {
-        self::$pag = $pag;
-        return redirect('/home')->with('pag',$pag);//редирект на home
     }
     
     public function postIndex(Requests\ContentRequest $r)
@@ -68,6 +58,10 @@ class HomeController extends Controller
     
     public function getDelete($id)
     {
+        $img = Content::where('id',$id)->first();
+        if($img->img != 'default.jpg') {
+            $this->delImg($img->img);
+        }
         Content::where('id',$id)->delete();//удаляю зарись из таблицы Products БД
         return redirect('/home');//редирект на home
     }
@@ -82,13 +76,33 @@ class HomeController extends Controller
     {
         $this->picture($r);
         $cont = collect($r->all());
-        $cont->pop();
+        if($cont['picture1']){
+            $cont->pop();
+        }
+        //dd($cont);
         if(!$cont['url']) {
             $cont['url'] = Transliteration::clean_filename($cont['title']);
         } else {
             $cont['url'] = Transliteration::clean_filename($cont['url']);
         }
         Content::where('id',$id)->update($cont->all());//обновляю запись с параметром ID в таблице Products БД
+        return redirect('/home');//редирект на home
+    }
+
+    public function postCreate(Requests\ContentRequest $r)
+    {
+        $this->picture($r);
+        $cont = collect($r->all());
+        if($cont['picture1']){
+            $cont->pop();
+        }
+        //dd($cont);
+        if(!$cont['url']) {
+            $cont['url'] = Transliteration::clean_filename($cont['title']);
+        } else {
+            $cont['url'] = Transliteration::clean_filename($cont['url']);
+        }
+        Content::insert($cont->all());//обновляю запись с параметром ID в таблице Products БД
         return redirect('/home');//редирект на home
     }
 
@@ -121,6 +135,19 @@ class HomeController extends Controller
             $r['img'] = $pic;
         }
     }
+
+    public function delImg($img) {
+        $path = public_path().'/media/uploads/';
+        $filename = $path.$img;
+        $filename_s = $path.'s_'.$img;
+        if(file_exists($filename)){
+            unlink($filename);
+            unlink($filename_s);
+            return 'файл удален:'.$img;
+        };
+        return 'что-то пошло не так';
+    }
+
     public function cook_arr($cook){
         $big_arr = explode(',',$cook);
         foreach($big_arr as $k=>$v) {

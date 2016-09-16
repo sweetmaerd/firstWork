@@ -150,7 +150,11 @@ return [
 
         Frozennode\Administrator\AdministratorServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        That0n3guy\Transliteration\TransliterationServiceProvider::class
+        That0n3guy\Transliteration\TransliterationServiceProvider::class,
+        sweetmaerd\example\ExampleServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+        'Collective\Html\HtmlServiceProvider'
+
 
     ],
 
@@ -199,6 +203,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 
     ],
 

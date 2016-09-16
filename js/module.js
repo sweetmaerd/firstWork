@@ -22,6 +22,11 @@ $(function() {
                 $('.black-list').remove();
                 $('.modal-window').remove();
             }).appendTo(modal);
+        $('.black-list').click(function (event) {
+                event.preventDefault();
+                $('.black-list').remove();
+                $('.modal-window').remove();
+            });
 
         $.ajax({
             type: 'get',

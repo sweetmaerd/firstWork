@@ -14,7 +14,7 @@
                     @endif
 
                     <!--Начало формы -->
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/home') }}" enctype = 'multipart/form-data'>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/home/create') }}" enctype = 'multipart/form-data'>
                         {{ csrf_field() }}
 
                         <!--Начало input title -->
@@ -97,7 +97,7 @@
 
                             <div class="col-md-6">
                                 <p><select id="showhide" class="form-control" name="showhide">
-                                        <option selected value='show'>Показать</option>
+                                        <option  value='show'>Показать</option>
                                         <option value= 'hide' >Скрыть</option>
                                     </select>
                                 </p>

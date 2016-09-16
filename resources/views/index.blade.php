@@ -5,7 +5,9 @@
         <div class="row">
 
             <div class="col-sm-5 news">
-                <h3 style="border-top: 3px solid red"></h3sty>
+
+
+                <h3 style="border-top: 3px solid red"></h3>
                 @foreach($news as $v)
                     <div id="{{$v->id}}" class=" index_content">
                         <div class="row">
@@ -26,9 +28,10 @@
                 @endforeach
             </div>
 
+
             <div class="col-sm-5 news">
-                <h3 style="border-top: 3px solid blue"></h3sty>
-                @foreach($news as $v)
+                <h3 style="border-top: 3px solid blue"></h3>
+                @foreach($albums as $v)
                     <div id="{{$v->id}}" class=" index_content">
                         <div class="row">
                             <div id="img_content" class="col-sm-5">
@@ -52,7 +55,7 @@
 
 
             <div class="col-sm-2">
-                <h3 style="border-top: 3px solid lightgrey"></h3sty>
+                <h3 style="border-top: 3px solid lightgrey"></h3>
                 <div><h1><span>Sidebar</span></h1></div>
             </div>
         </div>

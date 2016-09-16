@@ -20,8 +20,9 @@ class BaseController extends Controller
      */
     public function getIndex()
     {
-        $news = Content::where('categories_id','1')->orderBy('id','desc')->get();
-        $albums = Content::where('categories_id','2')->orderBy('id','desc')->get();
+        $news = Category::where('name','News')->first()->content()->where('showhide','show')->orderBy('id','desc')->get();
+        //dd($news);
+        $albums = Category::where('name','Albums')->first()->content()->where('showhide','show')->orderBy('id','desc')->get();
         return view('index')->with(['news'=>$news, 'albums'=>$albums]);
     }
 
