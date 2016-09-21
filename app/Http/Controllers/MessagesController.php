@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 class MessagesController extends Controller
 {
     /**
@@ -49,7 +50,45 @@ class MessagesController extends Controller
         $thread->markAsRead($userId);
         return view('messenger.show', compact('thread', 'users'));
     }
+
     /**
+     * @param $id
+     * @return StreamedResponse
+     */
+    public function real($id)
+    {
+        $response = new StreamedResponse();
+        $response->headers->set('Content-Type', 'text/event-stream');
+        $response->headers->set('Cach-Control', 'no-cache');
+        $response->setCallback(function(){
+            $last_messages = '';
+           // $user = Auth::user()->id;
+            if(isset($_SERVER['HTTP_LAST_EVENT_ID'])){
+                $last_messages = $_SERVER['HTTP_LAST_EVENT_ID'];
+            } else {
+                $last_messages = '1';
+            }
+            $start_time = time();
+            do{
+                //$message = message::where('thread_id',$last_messages)->first();
+                //echo 'id'.$message->id.PHP_EOL;
+                //echo 'id'.$message->id.PHP_EOL;
+                //echo 'data'.$message->body.PHP_EOL;
+                echo 'data: '.$last_messages . "\n\n";
+                echo "retry: 10000\n";
+                ob_flush();
+                flush();
+                if((time()-$start_time)>2){
+                    die();
+                }
+                sleep(3);
+            }while(true) ;
+        });
+
+        return $response;
+    }
+    /**
+     *
      * Creates a new message thread.
      *
      * @return mixed

@@ -88,11 +88,12 @@
                             <div class="col-md-6">
                                 <input id="url" type="text" class="form-control" name="url" value=
                                     @if(!count($errors))
-                                    "";
+                                        "";
                                     @else
-                                    "{{ old('url') }}";
+                                        "{{ old('url') }}";
                                     @endif
-                                placeholder="Оставьте пустым, если не хотите менять URL ">
+                                    placeholder="Оставьте пустым, если не хотите менять URL "
+                                >
 
                                 @if ($errors->has('url'))
                                     <span class="help-block">
@@ -132,11 +133,7 @@
                         <!--Начало input img -->
                         <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
                             <label for="img" class="col-md-4 control-label">
-                                @if($entery->img)
-                                    {{'Картинка есть. Обновить.'}}
-                                   @else
-                                   {{'Добавить изображения'}}
-                                   @endif
+                                <img class="img-circle img_content" src="/public/media/uploads/{{$entery->img}}" alt="{{$entery->img}}" width="100" height="100">
                             </label>
 
                             <div class="col-md-6">

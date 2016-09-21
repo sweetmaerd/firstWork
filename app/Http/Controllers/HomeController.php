@@ -46,16 +46,20 @@ class HomeController extends Controller
     public function postIndex(Requests\ContentRequest $r)
     {
         $this->picture($r);
-        $cont = collect($r->all());
-        if(!$cont['url']) {
-            $cont['url'] = Transliteration::clean_filename($cont['title']);
+        $content = collect($r->all());
+        if(!$content['url']) {
+            $content['url'] = Transliteration::clean_filename($content['title']);
         } else {
-            $cont['url'] = Transliteration::clean_filename($cont['url']);
+            $content['url'] = Transliteration::clean_filename($content['url']);
         }
-        Content::create($cont->all());//добавляю запись в БД в таблицу Products
+        Content::create($content->all());//добавляю запись в БД в таблицу Products
         return redirect('/home');//редирект на home
     }
-    
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getDelete($id)
     {
         $img = Content::where('id',$id)->first();
@@ -72,28 +76,36 @@ class HomeController extends Controller
         return view('home_update')->with(['entery'=>$entery[0], 'category'=>$this->category]);//загружаю шаблон home_update
     }
 
+
     public function postUpdate(Requests\ContentRequest $r, $id)
     {
-        $this->picture($r);
-        $cont = collect($r->all());
-        if($cont['picture1']){
-            $cont->pop();
+        $this->picture($r);//если пришла картинка, то обрабатываем её
+        $content = collect($r->all());
+        //роверяю пришла ли картинка при обновлении записи
+        //dd($content);
+
+        if(isset($content['picture1'])){
+            $img = Content::where('id',$id)->first();
+            if($img->img != 'default.jpg') {
+                $this->delImg($img->img);
+            }
+            $content->pop();//удаляем ненужную строку
         }
-        //dd($cont);
-        if(!$cont['url']) {
-            $cont['url'] = Transliteration::clean_filename($cont['title']);
+        if(!$content['url']) {
+            $content['url'] = Transliteration::clean_filename($content['title']);
         } else {
-            $cont['url'] = Transliteration::clean_filename($cont['url']);
+            $content['url'] = Transliteration::clean_filename($content['url']);
         }
-        Content::where('id',$id)->update($cont->all());//обновляю запись с параметром ID в таблице Products БД
+        Content::where('id',$id)->update($content->all());//обновляю запись с параметром ID в таблице Products БД
         return redirect('/home');//редирект на home
     }
+
 
     public function postCreate(Requests\ContentRequest $r)
     {
         $this->picture($r);
         $cont = collect($r->all());
-        if($cont['picture1']){
+        if(isset($cont['picture1'])){
             $cont->pop();
         }
         //dd($cont);
@@ -127,14 +139,17 @@ class HomeController extends Controller
 
     public function picture(&$r)
     {
-        $pict = Input::file('picture1');
-        $dir = '/media/uploads/';
-        $time = time();
-        $pic = \App::make('\App\Libs\ImagesClass')->urlGet($pict, $dir, $time);
-        if($pic) {
-            $r['img'] = $pic;
+        if($pict = Input::file('picture1')){
+            $dir = '/media/uploads/';
+            $time = time();
+            $pic = \App::make('\App\Libs\ImagesClass')->urlGet($pict, $dir, $time);
+            if($pic) {
+                $r['img'] = $pic;
+            }
         }
+        return;
     }
+
 
     public function delImg($img) {
         $path = public_path().'/media/uploads/';
@@ -142,7 +157,9 @@ class HomeController extends Controller
         $filename_s = $path.'s_'.$img;
         if(file_exists($filename)){
             unlink($filename);
-            unlink($filename_s);
+            if(file_exists($filename_s)){
+                unlink($filename_s);
+            }
             return 'файл удален:'.$img;
         };
         return 'что-то пошло не так';
