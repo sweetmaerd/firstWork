@@ -7,11 +7,23 @@ function start_listeners(message_id) {
 
     source = new EventSource("real/2");
     source.onopen = function(e) {
-        console.log('good');
+        console.log('connect');
     };
     source.onmessage = function(e) {
-        //$('div').html(e.data).prependTo('.pusto');
+        if(e.data){
+            //$('<div>').attr('class', 'pusto').fadeIn('show').prependTo('.messageses');
+            $('#pusto').append(e.data);
+        }
+        
         console.log(e.data);
         console.log(e.id);
     };
+}
+
+$('#send-message').keypress(send_enter);
+
+function send_enter(e){
+    if(e.keyCode == 13){
+        console.log('enter');
+    }
 }

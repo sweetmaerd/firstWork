@@ -1,6 +1,9 @@
 @extends('templates.default')
 
-@section('content')   
+@section('content')
+<section id="location">
+    <input type="button" id="getlocation" value="где я?">
+</section>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -14,6 +17,7 @@
             <th><label for="Count" class="control-label">Количество</label></th>
         </tr>
         </thead>
+
         <tbody>
         @foreach($all as $v)
         <tr>

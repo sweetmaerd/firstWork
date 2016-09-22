@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 class MessagesController extends Controller
 {
+    private $id;
     /**
      * Show all of the message threads to the user.
      *
@@ -57,63 +58,34 @@ class MessagesController extends Controller
      */
     public function real($id)
     {
+        $this->id = $id;
         $response = new StreamedResponse();
         $response->headers->set('Content-Type', 'text/event-stream');
         $response->headers->set('Cach-Control', 'no-cache');
         $response->setCallback(function(){
-            $start = time();
-
-            $start = time();
-            $id1 = (isset($_SERVER['HTTP_LAST_EVENT_ID'])) ? $_SERVER['HTTP_LAST_EVENT_ID'] + 1 : 1;
-
-            while(true)
-            {
-                if ((time() - $start) > 10) {
-                    break;
+           // $user = Auth::user()->id;
+            //$last_message = message::where('thread_id',$this->id)->get()->last();
+            $start_time = time();
+            do{
+                $message = message::where('thread_id',$this->id)->get()->last();
+                if(( time() - strtotime($message->created_at)) < 9 and $message->user->name !=Auth::user()->name ){
+                    echo 'data: '.$message->body. "\n\n";
                 }
-
-                echo "id: this".$id1."\n";
-                echo "retry: 1000\n";
-                echo "data: ID ¹".$id1."\n\n";
-
+                echo 'data :'. $message->user->name."\n\n";
+                echo "retry: 5000\n";
                 ob_flush();
                 flush();
-
-                $id1 += 1;
+                if((time()-$start_time)>2){
+                    die();
+                }
                 sleep(1);
-            }
-
+            }while(true) ;
         });
 
         return $response;
     }
     /**
      *
-
-
-
-    $last_messages = '';
-    // $user = Auth::user()->id;
-    if(isset($_SERVER['HTTP_LAST_EVENT_ID'])){
-    $last_messages = $_SERVER['HTTP_LAST_EVENT_ID'];
-    } else {
-    $last_messages = '1';
-    }
-    $start_time = time();
-    do{
-    //$message = message::where('thread_id',$last_messages)->first();
-    //echo 'id'.$message->id.PHP_EOL;
-    //echo 'id'.$message->id.PHP_EOL;
-    //echo 'data'.$message->body.PHP_EOL;
-    echo 'data: '.$last_messages . "\n\n";
-    echo "retry: 10000\n";
-    ob_flush();
-    flush();
-    if((time()-$start_time)>2){
-    die();
-    }
-    sleep(3);
-    }while(true) ;
      * Creates a new message thread.
      *
      * @return mixed
