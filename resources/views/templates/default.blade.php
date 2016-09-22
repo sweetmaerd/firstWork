@@ -22,9 +22,11 @@
 
     <!--[if lt IE 7]><link rel="stylesheet" type="text/css" media="screen" href="css/ie-fix.css" /><![endif]-->
 
-
+@section('sctipt')
     <script type="text/javascript" src={{asset("js/jquery-3.1.0.min.js")}}></script>
+
     <script type="text/javascript" src={{asset("js/module.js")}}></script>
+    <script type="text/javascript" src={{asset("js/geolocate.js")}}></script>
 
     <script type="text/javascript" src={{asset("js/jquery.tweet.js")}}></script>
 
@@ -39,6 +41,7 @@
     <script type="text/javascript" src={{asset("js/jquery.quicksand-config.js")}}></script>
 
     <script type="text/javascript" src={{asset("js/scripts.js")}}></script>
+@show
     <title><?=(isset($title)?$title:''); ?></title>
 
 
