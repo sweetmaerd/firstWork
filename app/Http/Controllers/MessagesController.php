@@ -61,34 +61,59 @@ class MessagesController extends Controller
         $response->headers->set('Content-Type', 'text/event-stream');
         $response->headers->set('Cach-Control', 'no-cache');
         $response->setCallback(function(){
-            $last_messages = '';
-           // $user = Auth::user()->id;
-            if(isset($_SERVER['HTTP_LAST_EVENT_ID'])){
-                $last_messages = $_SERVER['HTTP_LAST_EVENT_ID'];
-            } else {
-                $last_messages = '1';
-            }
-            $start_time = time();
-            do{
-                //$message = message::where('thread_id',$last_messages)->first();
-                //echo 'id'.$message->id.PHP_EOL;
-                //echo 'id'.$message->id.PHP_EOL;
-                //echo 'data'.$message->body.PHP_EOL;
-                echo 'data: '.$last_messages . "\n\n";
-                echo "retry: 10000\n";
+            $start = time();
+
+            $start = time();
+            $id1 = (isset($_SERVER['HTTP_LAST_EVENT_ID'])) ? $_SERVER['HTTP_LAST_EVENT_ID'] + 1 : 1;
+
+            while(true)
+            {
+                if ((time() - $start) > 10) {
+                    break;
+                }
+
+                echo "id: this".$id1."\n";
+                echo "retry: 1000\n";
+                echo "data: ID ¹".$id1."\n\n";
+
                 ob_flush();
                 flush();
-                if((time()-$start_time)>2){
-                    die();
-                }
-                sleep(3);
-            }while(true) ;
+
+                $id1 += 1;
+                sleep(1);
+            }
+
         });
 
         return $response;
     }
     /**
      *
+
+
+
+    $last_messages = '';
+    // $user = Auth::user()->id;
+    if(isset($_SERVER['HTTP_LAST_EVENT_ID'])){
+    $last_messages = $_SERVER['HTTP_LAST_EVENT_ID'];
+    } else {
+    $last_messages = '1';
+    }
+    $start_time = time();
+    do{
+    //$message = message::where('thread_id',$last_messages)->first();
+    //echo 'id'.$message->id.PHP_EOL;
+    //echo 'id'.$message->id.PHP_EOL;
+    //echo 'data'.$message->body.PHP_EOL;
+    echo 'data: '.$last_messages . "\n\n";
+    echo "retry: 10000\n";
+    ob_flush();
+    flush();
+    if((time()-$start_time)>2){
+    die();
+    }
+    sleep(3);
+    }while(true) ;
      * Creates a new message thread.
      *
      * @return mixed

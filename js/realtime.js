@@ -12,5 +12,6 @@ function start_listeners(message_id) {
     source.onmessage = function(e) {
         //$('div').html(e.data).prependTo('.pusto');
         console.log(e.data);
+        console.log(e.id);
     };
 }
