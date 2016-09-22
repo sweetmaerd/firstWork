@@ -1,8 +1,11 @@
 @extends('layouts.master')
+
 @section('script')
-@parent
-<script type="text/javascript" src={{asset("js/realtime.js")}}></script>
+    @parent
+    <script type="text/javascript" src={{asset("js/jquery-3.1.0.min.js")}}></script>
+    <script type="text/javascript" src={{asset("js/realtime.js")}}></script>
 @stop
+
 @section('content')
 <div class="col-md-6 ">
     <h1>{{ $thread->subject }}</h1>
@@ -21,10 +24,10 @@
     @endforeach
     <div id="pusto"></div>
     <h2>Add a new message</h2>
-    {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'POST']) !!}
     <!-- Message Form Input -->
-    <div class="form-group">
-        {!! Form::textarea('message', null, ['class' => 'form-control', 'id'=>'send-message']) !!}
+    <div class="form-group" data-id="{{$thread->id}}">
+        {!! Form::textarea('message', null, ['class' => 'form-control', 'id'=>'send_message']) !!}
     </div>
 
     @if($users->count() > 0)
@@ -34,13 +37,13 @@
         @endforeach
     </div>
     @endif
-
+        <input type="hidden" id="token" data-token="{{ csrf_token() }}">
     <!-- Submit Form Input -->
     <div class="form-group">
         {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
     </div>
+
     {!! Form::close() !!}
     <div>
-        <input type="text" id="send-message">
 </div>
 @stop

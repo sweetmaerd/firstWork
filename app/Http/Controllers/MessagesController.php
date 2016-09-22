@@ -63,15 +63,14 @@ class MessagesController extends Controller
         $response->headers->set('Content-Type', 'text/event-stream');
         $response->headers->set('Cach-Control', 'no-cache');
         $response->setCallback(function(){
-           // $user = Auth::user()->id;
-            //$last_message = message::where('thread_id',$this->id)->get()->last();
+            $user = Auth::user()->id;
+            $last_message = message::where('thread_id',$this->id)->get()->last();
             $start_time = time();
             do{
                 $message = message::where('thread_id',$this->id)->get()->last();
-                if(( time() - strtotime($message->created_at)) < 9 and $message->user->name !=Auth::user()->name ){
+                if(( time() - strtotime($message->created_at)) < 10  ){
                     echo 'data: '.$message->body. "\n\n";
                 }
-                echo 'data :'. $message->user->name."\n\n";
                 echo "retry: 5000\n";
                 ob_flush();
                 flush();
@@ -138,6 +137,7 @@ class MessagesController extends Controller
      */
     public function update($id)
     {
+        //dd(Input::get());
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {

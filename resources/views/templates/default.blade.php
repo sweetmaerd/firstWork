@@ -22,11 +22,11 @@
 
     <!--[if lt IE 7]><link rel="stylesheet" type="text/css" media="screen" href="css/ie-fix.css" /><![endif]-->
 
-@section('sctipt')
+@section('script')
     <script type="text/javascript" src={{asset("js/jquery-3.1.0.min.js")}}></script>
 
     <script type="text/javascript" src={{asset("js/module.js")}}></script>
-    <script type="text/javascript" src={{asset("js/geolocate.js")}}></script>
+
 
     <script type="text/javascript" src={{asset("js/jquery.tweet.js")}}></script>
 
@@ -71,6 +71,7 @@
                     <li class="current"><a href={{url("/")}}>Главная</a></li>
                     <li class="current"><a href={{url("/content")}}>Товары</a></li>
                     <li class="current"><a href={{url("/home")}}>Кабинет</a></li>
+                    <li class="current"><a href={{url("/messages")}}>Чат</a></li>
                     <li class="current"><a href={{url("/admin")}}>Админка</a></li>
                     <li class="current"><a href={{url("/basket")}} >Корзина<span class="badge"><?=(isset($count)) ? $count:0; ?></span></a></li>
                 </ul>

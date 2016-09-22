@@ -25,7 +25,7 @@ Route::group(['prefix' => 'messages'], function () {
     Route::get('real/{id}', ['as' => 'messages.real', 'uses' => 'MessagesController@real']);
     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    Route::post('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
 
 Route::get('/home', 'HomeController@index');

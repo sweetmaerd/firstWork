@@ -1,9 +1,14 @@
 @extends('templates.default')
-
+@section('script')
+    @parent
+    <script type="text/javascript" src={{asset("js/geolocate.js")}}></script>
+    <script type="text/javascript" src={{asset("js/enter.js")}}></script>
+@stop
 @section('content')
 <section id="location">
     <input type="button" id="getlocation" value="где я?">
 </section>
+<input type="text" id="send_message">
     <table class="table table-striped">
         <thead>
         <tr>
